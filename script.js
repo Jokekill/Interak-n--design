@@ -199,34 +199,21 @@
             }
         }
 
-        // Preset buttons text with minutes
+        // Preset buttons
         presetButtons.forEach((btn) => {
             const mins = parseInt(
                 btn.dataset.presetMins,
                 10
             );
             if (!Number.isFinite(mins)) return;
-            const labelTemplate = dict["preset-label-pattern"] || null;
-            if (labelTemplate) {
-                // not used, but reserved
-                btn.textContent = labelTemplate.replace(
-                    "{mins}",
-                    String(mins)
-                );
+            if (currentLang === "de") {
+                btn.textContent = `${mins} Min`;
             } else {
-                // fallback: localized "min" is already in minus/plus labels.
-                if (currentLang === "de") {
-                    btn.textContent = `${mins} Min`;
-                } else if (currentLang === "cs" || currentLang === "sk") {
-                    btn.textContent = `${mins} min`;
-                } else {
-                    btn.textContent = `${mins} min`;
-                }
+                btn.textContent = `${mins} min`;
             }
         });
 
-        // plus/minus buttons (already handled via data-i18n, but we want to
-        // ensure the dynamic text is updated when language changes)
+        // plus/minus buttons
         if (minusMinuteBtn) {
             minusMinuteBtn.textContent = t("minus-minute");
         }
@@ -292,15 +279,28 @@
         primaryBtn.textContent = t(labelKey);
     }
 
-    function clearIntervals() {
-        if (stopwatchIntervalId !== null) {
-            clearInterval(stopwatchIntervalId);
-            stopwatchIntervalId = null;
+    function updateTimerProgress() {
+        if (!timeDisplay) return;
+        if (timerDuration <= 0) {
+            timeDisplay.style.setProperty("--progress-angle", "360deg");
+            return;
         }
-        if (timerIntervalId !== null) {
-            clearInterval(timerIntervalId);
-            timerIntervalId = null;
-        }
+
+        const base = timerRunning
+            ? timerRemaining
+            : timerRemaining > 0
+            ? timerRemaining
+            : timerDuration;
+
+        const fraction = Math.max(
+            0,
+            Math.min(1, base / timerDuration)
+        );
+        const angle = fraction * 360;
+        timeDisplay.style.setProperty(
+            "--progress-angle",
+            `${angle}deg`
+        );
     }
 
     // ---------- Stopwatch ----------
@@ -438,6 +438,7 @@
         timerDuration = totalMs;
         timerRemaining = totalMs;
         updateTimerDisplay(timerRemaining);
+        updateTimerProgress();
     }
 
     function startTimer() {
@@ -471,6 +472,7 @@
                 timerIntervalId = null;
             }
             updateTimerDisplay(remaining);
+            updateTimerProgress();
             flashFinished();
             updatePrimaryLabel();
             return;
@@ -478,6 +480,7 @@
 
         timerRemaining = remaining;
         updateTimerDisplay(remaining);
+        updateTimerProgress();
     }
 
     function pauseTimer() {
@@ -490,6 +493,7 @@
             timerIntervalId = null;
         }
         updateTimerDisplay(timerRemaining);
+        updateTimerProgress();
         updatePrimaryLabel();
     }
 
@@ -506,13 +510,13 @@
             updateTimerDisplay(0);
         }
         card?.classList.remove("finished-flash");
+        updateTimerProgress();
         updatePrimaryLabel();
     }
 
     function flashFinished() {
         if (!card) return;
         card.classList.remove("finished-flash");
-        // restart animation
         void card.offsetWidth; // force reflow
         card.classList.add("finished-flash");
     }
@@ -521,11 +525,9 @@
         const deltaMs = deltaMinutes * 60_000;
 
         if (timerRunning) {
-            // capture current remaining as base
             const now = performance.now();
             timerRemaining = Math.max(0, timerEndTime - now);
         } else if (timerDuration === 0 && timerRemaining === 0) {
-            // no timer set yet, base on inputs
             const fromInputs = getMsFromInputs();
             timerDuration = fromInputs;
             timerRemaining = fromInputs;
@@ -544,6 +546,7 @@
 
         setInputsFromMs(newMs);
         updateTimerDisplay(newMs);
+        updateTimerProgress();
         updatePrimaryLabel();
     }
 
@@ -552,7 +555,6 @@
 
         const totalMs = minutes * 60 * 1000;
 
-        // stop current if running
         if (timerRunning) {
             pauseTimer();
         }
@@ -561,6 +563,7 @@
         timerRemaining = totalMs;
         setInputsFromMs(totalMs);
         updateTimerDisplay(totalMs);
+        updateTimerProgress();
         startTimer();
     }
 
@@ -599,6 +602,7 @@
                     timerRemaining > 0 ? timerRemaining : timerDuration;
                 setInputsFromMs(toShow);
                 updateTimerDisplay(toShow);
+                updateTimerProgress();
             }
         }
 
@@ -743,5 +747,6 @@
     setLanguage(currentLang);
 
     updateStopwatchDisplay(0);
+    updateTimerProgress();
     updatePrimaryLabel();
 })();

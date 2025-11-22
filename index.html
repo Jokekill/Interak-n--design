@@ -62,8 +62,30 @@
                     </button>
                 </div>
 
-                <div class="time-display" id="time-display" aria-live="polite">
-                    00:00.0
+                <!-- DISPLAY + +/- TLAČÍTKA V JEDNOM ŘÁDKU -->
+                <div class="time-row">
+                    <div class="time-display" id="time-display" aria-live="polite">
+                        00:00.0
+                    </div>
+
+                    <div class="timer-adjust" id="timer-adjust">
+                        <button
+                            class="secondary-button subtle"
+                            id="minus-minute-btn"
+                            type="button"
+                            data-i18n="minus-minute"
+                        >
+                            − 1 min
+                        </button>
+                        <button
+                            class="secondary-button subtle"
+                            id="plus-minute-btn"
+                            type="button"
+                            data-i18n="plus-minute"
+                        >
+                            + 1 min
+                        </button>
+                    </div>
                 </div>
 
                 <div class="timer-inputs" id="timer-inputs">
@@ -149,25 +171,6 @@
                             25 min
                         </button>
                     </div>
-                </div>
-
-                <div class="timer-adjust" id="timer-adjust">
-                    <button
-                        class="secondary-button subtle"
-                        id="minus-minute-btn"
-                        type="button"
-                        data-i18n="minus-minute"
-                    >
-                        − 1 min
-                    </button>
-                    <button
-                        class="secondary-button subtle"
-                        id="plus-minute-btn"
-                        type="button"
-                        data-i18n="plus-minute"
-                    >
-                        + 1 min
-                    </button>
                 </div>
 
                 <div class="controls">

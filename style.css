@@ -187,9 +187,21 @@ body {
     color: var(--accent-strong);
 }
 
+/* DISPLAY ROW */
+
+.time-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 /* TIME DISPLAY */
 
 .time-display {
+    --progress-angle: 360deg;
+
+    position: relative;
+    flex: 1;
     font-feature-settings: "tnum" 1, "ss01" 1;
     font-variant-numeric: tabular-nums;
     font-size: clamp(3.1rem, 6.2vw, 3.8rem);
@@ -217,6 +229,27 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: visible;
+}
+
+/* Progress ring – animovaný odpočet */
+.time-display::before {
+    content: "";
+    position: absolute;
+    inset: -5px;
+    border-radius: inherit;
+    background: conic-gradient(
+        var(--accent-strong) var(--progress-angle),
+        rgba(30, 64, 175, 0.3) 0
+    );
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+}
+
+/* aktivní jen v režimu časovače */
+body.mode-timer .time-display::before {
+    opacity: 1;
 }
 
 body.mode-timer .time-display {
@@ -320,14 +353,22 @@ body:not(.mode-timer) .timer-presets {
     border-color: rgba(56, 189, 248, 0.9);
 }
 
+/* + / − MINUTY – vedle displeje */
+
 .timer-adjust {
     display: flex;
-    gap: 8px;
-    justify-content: flex-end;
+    flex-direction: column;
+    gap: 6px;
 }
 
 body:not(.mode-timer) .timer-adjust {
     display: none;
+}
+
+.timer-adjust .secondary-button.subtle {
+    min-width: 0;
+    padding-inline: 10px;
+    font-size: 0.78rem;
 }
 
 /* BUTTONS */
@@ -534,10 +575,6 @@ body.mode-timer #laps-container {
     .primary-button,
     .secondary-button {
         width: 100%;
-    }
-
-    .timer-adjust {
-        justify-content: center;
     }
 
     .app-header,
