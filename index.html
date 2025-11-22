@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Minimal Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+</head>
+<body class="mode-stopwatch">
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="brand">
+                <span class="brand-mark"></span>
+                <span class="brand-name">Minimal Timer</span>
+            </div>
+            <button class="ghost-button" id="fullscreen-btn" type="button">
+                Full screen
+            </button>
+        </header>
+
+        <main class="app-main">
+            <section class="timer-card" aria-label="Timer">
+                <div class="mode-toggle" role="tablist">
+                    <button
+                        class="mode-button active"
+                        data-mode="stopwatch"
+                        role="tab"
+                        aria-selected="true"
+                    >
+                        Stopwatch
+                    </button>
+                    <button
+                        class="mode-button"
+                        data-mode="timer"
+                        role="tab"
+                        aria-selected="false"
+                    >
+                        Timer
+                    </button>
+                </div>
+
+                <div class="time-display" id="time-display" aria-live="polite">
+                    00:00.0
+                </div>
+
+                <div class="timer-inputs" id="timer-inputs">
+                    <label class="timer-input">
+                        <span class="timer-input-label">Minutes</span>
+                        <input
+                            id="minutes-input"
+                            type="number"
+                            min="0"
+                            max="999"
+                            inputmode="numeric"
+                        />
+                    </label>
+                    <label class="timer-input">
+                        <span class="timer-input-label">Seconds</span>
+                        <input
+                            id="seconds-input"
+                            type="number"
+                            min="0"
+                            max="59"
+                            inputmode="numeric"
+                        />
+                    </label>
+                    <button
+                        class="primary-outline-button"
+                        id="set-timer-btn"
+                        type="button"
+                    >
+                        Set time
+                    </button>
+                </div>
+
+                <div class="controls">
+                    <button
+                        class="primary-button"
+                        id="primary-action-btn"
+                        type="button"
+                    >
+                        Start
+                    </button>
+                    <button
+                        class="secondary-button"
+                        id="reset-btn"
+                        type="button"
+                    >
+                        Reset
+                    </button>
+                </div>
+
+                <p class="hint">
+                    Space – start / pause · R – reset · M – switch mode
+                </p>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <span>Built for UX comparison · no ads, just time ✨</span>
+        </footer>
+    </div>
+</body>
+</html>
