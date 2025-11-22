@@ -88,6 +88,41 @@ body {
     box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.4);
 }
 
+.header-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.language-select {
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.5);
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--text-soft);
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    outline: none;
+}
+
+.language-select:focus-visible {
+    border-color: var(--accent-strong);
+    box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.5);
+}
+
+.ghost-link {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    text-decoration: none;
+    padding: 4px 8px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+}
+
+.ghost-link:hover {
+    color: var(--text-main);
+    border-color: rgba(148, 163, 184, 0.5);
+}
+
 .app-main {
     flex: 1;
     display: flex;
@@ -99,7 +134,7 @@ body {
 
 .timer-card {
     width: 100%;
-    max-width: 520px;
+    max-width: 540px;
     padding: 28px 24px 20px;
     border-radius: var(--radius-xl);
     background:
@@ -113,7 +148,7 @@ body {
     border: 1px solid rgba(148, 163, 184, 0.4);
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 18px;
 }
 
 /* MODE TOGGLE */
@@ -239,6 +274,62 @@ body:not(.mode-timer) .timer-inputs {
     margin: 0;
 }
 
+/* PRESETS & ADJUST */
+
+.timer-presets {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+body:not(.mode-timer) .timer-presets {
+    display: none;
+}
+
+.timer-presets-label {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: var(--text-muted);
+}
+
+.timer-presets-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.chip-button {
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.6);
+    background: rgba(15, 23, 42, 0.9);
+    color: var(--text-soft);
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition:
+        background 120ms ease,
+        color 120ms ease,
+        border-color 120ms ease,
+        transform 60ms ease;
+}
+
+.chip-button:hover {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    border-color: rgba(56, 189, 248, 0.9);
+}
+
+.timer-adjust {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+body:not(.mode-timer) .timer-adjust {
+    display: none;
+}
+
 /* BUTTONS */
 
 button {
@@ -295,6 +386,11 @@ button {
     border-color: rgba(148, 163, 184, 0.6);
 }
 
+.secondary-button.subtle {
+    padding-inline: 14px;
+    font-size: 0.85rem;
+}
+
 .primary-outline-button {
     background: rgba(15, 23, 42, 0.9);
     color: var(--accent-strong);
@@ -313,6 +409,12 @@ button {
     border-radius: 999px;
     border: 1px solid transparent;
     padding: 6px 10px;
+    font-size: 0.82rem;
+}
+
+.ghost-button.small {
+    padding: 4px 8px;
+    font-size: 0.78rem;
 }
 
 .ghost-button:hover {
@@ -327,10 +429,70 @@ button {
     justify-content: center;
 }
 
+/* LAP BUTTON VISIBILITY */
+
+body.mode-timer #lap-btn,
+body.mode-timer #laps-container {
+    display: none;
+}
+
+/* LAPS */
+
+.laps {
+    margin-top: 6px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(30, 64, 175, 0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.laps-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+}
+
+.laps-title {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.13em;
+    color: var(--text-muted);
+}
+
+.laps-list {
+    margin: 0;
+    padding-left: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-height: 140px;
+    overflow-y: auto;
+    font-size: 0.85rem;
+}
+
+.laps-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--text-soft);
+}
+
+.lap-label {
+    opacity: 0.85;
+}
+
+.lap-time-total {
+    color: var(--text-main);
+    font-variant-numeric: tabular-nums;
+}
+
 /* HINT */
 
 .hint {
     margin: 0;
+    margin-top: 4px;
     font-size: 0.78rem;
     color: var(--text-muted);
     text-align: center;
@@ -374,10 +536,19 @@ button {
         width: 100%;
     }
 
+    .timer-adjust {
+        justify-content: center;
+    }
+
     .app-header,
     .app-footer {
         font-size: 0.8rem;
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .header-actions {
+        align-self: stretch;
+        justify-content: flex-start;
     }
 }

@@ -12,11 +12,31 @@
         <header class="app-header">
             <div class="brand">
                 <span class="brand-mark"></span>
-                <span class="brand-name">Minimal Timer</span>
+                <span class="brand-name" data-i18n="app-title">Minimal Timer</span>
             </div>
-            <button class="ghost-button" id="fullscreen-btn" type="button">
-                Full screen
-            </button>
+            <div class="header-actions">
+                <button
+                    class="ghost-button"
+                    id="fullscreen-btn"
+                    type="button"
+                    data-i18n="fullscreen-enter"
+                >
+                    Full screen
+                </button>
+                <select
+                    id="language-select"
+                    class="language-select"
+                    aria-label="Language"
+                >
+                    <option value="en">EN</option>
+                    <option value="cs">CZ</option>
+                    <option value="sk">SK</option>
+                    <option value="de">DE</option>
+                </select>
+                <a href="about.html" class="ghost-link" data-i18n="about-link">
+                    About
+                </a>
+            </div>
         </header>
 
         <main class="app-main">
@@ -27,6 +47,7 @@
                         data-mode="stopwatch"
                         role="tab"
                         aria-selected="true"
+                        data-i18n="stopwatch-label"
                     >
                         Stopwatch
                     </button>
@@ -35,6 +56,7 @@
                         data-mode="timer"
                         role="tab"
                         aria-selected="false"
+                        data-i18n="timer-label"
                     >
                         Timer
                     </button>
@@ -46,7 +68,23 @@
 
                 <div class="timer-inputs" id="timer-inputs">
                     <label class="timer-input">
-                        <span class="timer-input-label">Minutes</span>
+                        <span
+                            class="timer-input-label"
+                            data-i18n="hours-label"
+                        >Hours</span>
+                        <input
+                            id="hours-input"
+                            type="number"
+                            min="0"
+                            max="99"
+                            inputmode="numeric"
+                        />
+                    </label>
+                    <label class="timer-input">
+                        <span
+                            class="timer-input-label"
+                            data-i18n="minutes-label"
+                        >Minutes</span>
                         <input
                             id="minutes-input"
                             type="number"
@@ -56,7 +94,10 @@
                         />
                     </label>
                     <label class="timer-input">
-                        <span class="timer-input-label">Seconds</span>
+                        <span
+                            class="timer-input-label"
+                            data-i18n="seconds-label"
+                        >Seconds</span>
                         <input
                             id="seconds-input"
                             type="number"
@@ -69,8 +110,63 @@
                         class="primary-outline-button"
                         id="set-timer-btn"
                         type="button"
+                        data-i18n="set-time"
                     >
                         Set time
+                    </button>
+                </div>
+
+                <div class="timer-presets" id="timer-presets">
+                    <span
+                        class="timer-presets-label"
+                        data-i18n="presets-label"
+                    >
+                        Quick start:
+                    </span>
+                    <div class="timer-presets-buttons">
+                        <button
+                            class="chip-button"
+                            data-preset-mins="3"
+                        >
+                            3 min
+                        </button>
+                        <button
+                            class="chip-button"
+                            data-preset-mins="5"
+                        >
+                            5 min
+                        </button>
+                        <button
+                            class="chip-button"
+                            data-preset-mins="15"
+                        >
+                            15 min
+                        </button>
+                        <button
+                            class="chip-button"
+                            data-preset-mins="25"
+                        >
+                            25 min
+                        </button>
+                    </div>
+                </div>
+
+                <div class="timer-adjust" id="timer-adjust">
+                    <button
+                        class="secondary-button subtle"
+                        id="minus-minute-btn"
+                        type="button"
+                        data-i18n="minus-minute"
+                    >
+                        − 1 min
+                    </button>
+                    <button
+                        class="secondary-button subtle"
+                        id="plus-minute-btn"
+                        type="button"
+                        data-i18n="plus-minute"
+                    >
+                        + 1 min
                     </button>
                 </div>
 
@@ -79,19 +175,47 @@
                         class="primary-button"
                         id="primary-action-btn"
                         type="button"
+                        data-i18n="start"
                     >
                         Start
                     </button>
                     <button
                         class="secondary-button"
+                        id="lap-btn"
+                        type="button"
+                        data-i18n="lap"
+                    >
+                        Lap
+                    </button>
+                    <button
+                        class="secondary-button"
                         id="reset-btn"
                         type="button"
+                        data-i18n="reset"
                     >
                         Reset
                     </button>
                 </div>
 
-                <p class="hint">
+                <div class="laps" id="laps-container" aria-label="Lap times">
+                    <div class="laps-header">
+                        <span
+                            class="laps-title"
+                            data-i18n="laps-title"
+                        >Laps</span>
+                        <button
+                            class="ghost-button small"
+                            id="clear-laps-btn"
+                            type="button"
+                            data-i18n="laps-clear"
+                        >
+                            Clear
+                        </button>
+                    </div>
+                    <ol class="laps-list" id="laps-list"></ol>
+                </div>
+
+                <p class="hint" data-i18n="hint">
                     Space – start / pause · R – reset · M – switch mode
                 </p>
             </section>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8" />
+    <title>Minimal Timer · O aplikaci</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="brand">
+                <span class="brand-mark"></span>
+                <span class="brand-name">Minimal Timer</span>
+            </div>
+            <a href="index.html" class="ghost-link">← Zpět na časovač</a>
+        </header>
+
+        <main class="app-main">
+            <section class="timer-card" aria-labelledby="about-heading">
+                <h1 id="about-heading" style="margin-top: 0; margin-bottom: 0.8rem;">
+                    O projektu Minimal Timer
+                </h1>
+                <p style="margin-top: 0.4rem; margin-bottom: 0.8rem; color: #9ca3af; font-size: 0.95rem;">
+                    Minimal Timer je malý experiment pro kurz Interakční design.
+                    Cílem je vytvořit modernější a uživatelsky přívětivější verzi
+                    klasických online stopek a časovače, bez reklam a vizuálního šumu.
+                </p>
+                <p style="margin-top: 0; margin-bottom: 1.2rem; color: #9ca3af; font-size: 0.95rem;">
+                    Aplikace běží čistě v prohlížeči – žádné back-end API, žádné sledování,
+                    jen HTML, CSS a JavaScript. Slouží jako referenční prototyp pro
+                    porovnání UX s původní stránkou online-stopwatch.com.
+                </p>
+
+                <button
+                    class="primary-button"
+                    type="button"
+                    onclick="window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')"
+                >
+                    Kup mi kafe ☕
+                </button>
+            </section>
+        </main>
+
+        <footer class="app-footer">
+            <span>Built for fun · žádné skutečné donate není potřeba 😄</span>
+        </footer>
+    </div>
+</body>
+</html>
